@@ -245,10 +245,10 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
                                     forKey:CYLBadgeShakeAnimationKey];
             break;
         case CYLBadgeAnimationTypeScale:
-            [self.cyl_badge.layer addAnimation:[CAAnimation cyl_scaleFrom:1.4
-                                                          toScale:0.6
-                                                         durTimes:1
-                                                              rep:MAXFLOAT]
+            [self.cyl_badge.layer addAnimation:[CAAnimation cyl_scaleFrom:1
+                                                          toScale:1.3
+                                                         durTimes:0.2
+                                                              rep:1]
                                     forKey:CYLBadgeScaleAnimationKey];
             break;
         case CYLBadgeAnimationTypeBounce:
