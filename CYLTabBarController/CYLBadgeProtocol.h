@@ -68,6 +68,10 @@ typedef NS_ENUM(NSUInteger, CYLBadgeAnimationType) {
 
 @property (nonatomic, assign, getter=cyl_badgeCornerRadius, setter=cyl_setBadgeCornerRadius:) CGFloat cyl_badgeCornerRadius;
 
+@property (nonatomic, assign, getter=cyl_badgeBorderWidth, setter=cyl_setBadgeBorderWidth:) CGFloat cyl_badgeBorderWidth;
+
+@property (nonatomic, strong, getter=cyl_badgeBorderColor, setter=cyl_setBadgeBorderColor:) UIColor *cyl_badgeBorderColor;
+
 - (BOOL)cyl_isShowBadge;
 
 /**

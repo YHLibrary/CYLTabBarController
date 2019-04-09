@@ -183,6 +183,22 @@
     [kActualView cyl_setBadgeCornerRadius:cyl_badgeCornerRadius];
 }
 
+- (UIColor *)cyl_badgeBorderColor {
+    return [kActualView cyl_badgeBorderColor];
+}
+
+- (void)cyl_setBadgeBorderColor:(UIColor *)badgeBorderColor {
+    [kActualView cyl_setBadgeBorderColor:badgeBorderColor];
+}
+
+- (CGFloat)cyl_badgeBorderWidth {
+    return [kActualView cyl_badgeBorderWidth];
+}
+
+- (void)cyl_setBadgeBorderWidth:(CGFloat)badgeBorderWidth {
+    [kActualView cyl_setBadgeBorderWidth:badgeBorderWidth];
+}
+
 #pragma mark - private method
 
 BOOL cyl_ClassMethodSwizzle(Class aClass, SEL originalSelector, SEL swizzleSelector) {

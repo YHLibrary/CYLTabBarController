@@ -186,6 +186,9 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
     if (self.cyl_badgeTextColor == nil) {
         self.cyl_badgeTextColor = [UIColor whiteColor];
     }
+    if (self.cyl_badgeBorderColor == nil) {
+        self.cyl_badgeBorderColor = [UIColor whiteColor];
+    }
     
     if (!self.cyl_badge) {
         self.cyl_badge = [[UILabel alloc] init];
@@ -198,6 +201,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         self.cyl_badge.layer.masksToBounds = YES;//very important
         self.cyl_badge.hidden = YES;
         self.cyl_badge.layer.zPosition = MAXFLOAT;
+        self.cyl_badge.layer.borderWidth = self.cyl_badgeBorderWidth;
 
         [self addSubview:self.cyl_badge];
         [self bringSubviewToFront:self.cyl_badge];
@@ -430,6 +434,29 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
     if (!self.cyl_badge) {
         [self cyl_badgeInit];
     }
+}
+
+- (void)cyl_setBadgeBorderWidth:(CGFloat)badgeBorderWidth {
+    objc_setAssociatedObject(self, @selector(cyl_badgeBorderWidth), [NSNumber numberWithFloat:badgeBorderWidth], OBJC_ASSOCIATION_RETAIN);
+    if (!self.cyl_badge) {
+        [self cyl_badgeInit];
+    }
+}
+
+- (CGFloat)cyl_badgeBorderWidth {
+    return [objc_getAssociatedObject(self, @selector(cyl_badgeBorderWidth)) floatValue];
+}
+
+- (UIColor *)cyl_badgeBorderColor {
+    return objc_getAssociatedObject(self, @selector(cyl_badgeBorderColor));
+}
+
+- (void)cyl_setBadgeBorderColor:(UIColor *)badgeBorderColor {
+    objc_setAssociatedObject(self, @selector(cyl_badgeBorderColor), badgeBorderColor, OBJC_ASSOCIATION_RETAIN);
+    if (!self.cyl_badge) {
+        [self cyl_badgeInit];
+    }
+    self.cyl_badge.layer.borderColor = badgeBorderColor.CGColor;
 }
 
 @end
