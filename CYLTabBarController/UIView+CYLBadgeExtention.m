@@ -170,8 +170,8 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         // 当数字的宽高比小于0.5，则用圆来显示
         frame.size.width = CGRectGetHeight(frame);
     } else {
-        // 当数字的宽高比大于0.5，则减去3倍的cyl_badgeMargin，项目中使用的self.cyl_badgeMargin均为负值
-        frame.size.width -= (3 * self.cyl_badgeMargin);
+        // 当数字的宽高比大于0.5，则减去5倍的cyl_badgeMargin，项目中使用的self.cyl_badgeMargin均为负值
+        frame.size.width -= (5 * self.cyl_badgeMargin);
     }
     self.cyl_badge.frame = frame;
     self.cyl_badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.cyl_badgeCenterOffset.x, self.cyl_badgeCenterOffset.y);
