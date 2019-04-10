@@ -41,6 +41,8 @@ typedef NS_ENUM(NSUInteger, CYLBadgeAnimationType) {
 
 @protocol CYLBadgeProtocol <NSObject>
 
+@property (nonatomic, strong, getter=cyl_badgeBackgroundView, setter=cyl_setBadgeBackgroundView:) UIView *cyl_badgeBackgroundView;
+
 @required
 
 @property (nonatomic, strong, getter=cyl_badge, setter=cyl_setBadge:) UILabel *cyl_badge; /* badge entity, which is adviced not to set manually */

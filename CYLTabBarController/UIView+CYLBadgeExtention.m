@@ -75,6 +75,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
  */
 - (void)cyl_clearBadge {
     self.cyl_badge.hidden = YES;
+    self.cyl_badgeBackgroundView.hidden = YES;
 }
 
 - (BOOL)cyl_isShowBadge {
@@ -87,6 +88,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
 - (void)cyl_resumeBadge {
     if (self.cyl_isPauseBadge) {
         self.cyl_badge.hidden = NO;
+        self.cyl_badgeBackgroundView.hidden = NO;
     }
 }
 
@@ -106,6 +108,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         self.cyl_badge.layer.cornerRadius = CGRectGetWidth(self.cyl_badge.frame) / 2;
     }
     self.cyl_badge.hidden = NO;
+    self.cyl_badgeBackgroundView = NO;
 }
 
 - (void)cyl_showNewBadge:(NSString *)value {
@@ -125,6 +128,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         self.cyl_badge.layer.cornerRadius = CGRectGetHeight(self.cyl_badge.frame) / 3;
     }
     self.cyl_badge.hidden = NO;
+    self.cyl_badgeBackgroundView.hidden = NO;
 }
 
 - (void)cyl_showTextBadge:(NSString *)value {
@@ -144,11 +148,14 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         
         self.cyl_badge.layer.cornerRadius = CGRectGetHeight(self.cyl_badge.frame) / 2;
         self.cyl_badge.hidden = NO;
+        self.cyl_badgeBackgroundView.hidden = NO;
         if (value == 0) {
             self.cyl_badge.hidden = YES;
+            self.cyl_badgeBackgroundView.hidden = YES;
         }
     }
     self.cyl_badge.hidden = NO;
+    self.cyl_badgeBackgroundView.hidden = NO;
 }
     
 - (void)cyl_showNumberBadgeWithValue:(NSInteger)value {
@@ -171,11 +178,20 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         frame.size.width = CGRectGetHeight(frame);
     } else {
         // 当数字的宽高比大于0.5，则减去5倍的cyl_badgeMargin，项目中使用的self.cyl_badgeMargin均为负值
-        frame.size.width -= (5 * self.cyl_badgeMargin);
+        frame.size.width -= (3 * self.cyl_badgeMargin);
     }
     self.cyl_badge.frame = frame;
     self.cyl_badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.cyl_badgeCenterOffset.x, self.cyl_badgeCenterOffset.y);
     self.cyl_badge.layer.cornerRadius = CGRectGetHeight(self.cyl_badge.frame) / 2;
+    
+    // 设置背景
+    self.cyl_badgeBackgroundView.hidden = (value == 0);
+    CGRect bgFrame = self.cyl_badge.frame;
+    bgFrame.size.width = bgFrame.size.width + 2;
+    bgFrame.size.height = bgFrame.size.height + 2;
+    self.cyl_badgeBackgroundView.frame = bgFrame;
+    self.cyl_badgeBackgroundView.center = self.cyl_badge.center;
+    self.cyl_badgeBackgroundView.layer.cornerRadius = CGRectGetHeight(self.cyl_badgeBackgroundView.frame) / 2;
 }
 
 //lazy loading
@@ -205,6 +221,14 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
 
         [self addSubview:self.cyl_badge];
         [self bringSubviewToFront:self.cyl_badge];
+    }
+    
+    if (!self.cyl_badgeBackgroundView) {
+        self.cyl_badgeBackgroundView = [[UIView alloc] init];
+        self.cyl_badgeBackgroundView.frame = self.cyl_badge.frame;
+        self.cyl_badgeBackgroundView.hidden = YES;
+        self.cyl_badgeBackgroundView.backgroundColor = [UIColor whiteColor];
+        [self insertSubview:self.cyl_badgeBackgroundView belowSubview:self.cyl_badge];
     }
 }
 
@@ -291,6 +315,15 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
 }
 
 #pragma mark -- setter/getter
+
+- (UIView *)cyl_badgeBackgroundView {
+    return objc_getAssociatedObject(self, @selector(cyl_badgeBackgroundView));
+}
+
+- (void)cyl_setBadgeBackgroundView:(UIView *)badgeBackgroundView {
+    objc_setAssociatedObject(self, @selector(cyl_badgeBackgroundView), badgeBackgroundView, OBJC_ASSOCIATION_RETAIN);
+}
+
 - (UILabel *)cyl_badge {
     return objc_getAssociatedObject(self, @selector(cyl_badge));
 }
