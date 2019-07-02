@@ -173,7 +173,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
     CGRect frame = self.cyl_badge.frame;
     frame.size.width += self.cyl_badgeMargin;
     frame.size.height += self.cyl_badgeMargin;
-    if(CGRectGetWidth(frame) / CGRectGetHeight(frame) < 0.5) {
+    if(CGRectGetWidth(frame) / CGRectGetHeight(frame) < 0.8) {
         // 当数字的宽高比小于0.5，则用圆来显示
         frame.size.width = CGRectGetHeight(frame);
     } else {
@@ -229,6 +229,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         self.cyl_badgeBackgroundView.frame = self.cyl_badge.frame;
         self.cyl_badgeBackgroundView.hidden = YES;
         self.cyl_badgeBackgroundView.backgroundColor = [UIColor whiteColor];
+        self.cyl_badgeBackgroundView.userInteractionEnabled = NO;
         [self insertSubview:self.cyl_badgeBackgroundView belowSubview:self.cyl_badge];
     }
 }
