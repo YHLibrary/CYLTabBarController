@@ -67,6 +67,11 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         [self cyl_showNewBadge:value];
         return;
     }
+    
+    if ([value isEqualToString:@"HOT"]) {
+        [self cyl_showHotBadge:value];
+        return;
+    }
     [self cyl_showTextBadge:value];
 }
 
@@ -111,6 +116,39 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
     self.cyl_badgeBackgroundView = NO;
 }
 
+- (void)cyl_showHotBadge:(NSString *)value {
+    [self cyl_badgeInit];
+    if (self.cyl_badge.tag != CYLBadgeStyleOther) {
+        self.cyl_badge.tag = CYLBadgeStyleOther;
+        self.cyl_badge.text = value;
+        [self cyl_adjustLabelWidth:self.cyl_badge];
+        CGRect frame = self.cyl_badge.frame;
+        frame.size.height = 13;
+        frame.size.width = CGRectGetWidth(frame) + 2 + 2;
+        self.cyl_badge.frame = frame;
+        self.cyl_badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.cyl_badgeCenterOffset.x, self.cyl_badgeCenterOffset.y);
+        self.cyl_badge.font = [UIFont systemFontOfSize:10];
+        
+        self.cyl_badge.layer.cornerRadius = CGRectGetHeight(self.cyl_badge.frame) / 2;
+        self.cyl_badge.hidden = NO;
+        self.cyl_badgeBackgroundView.hidden = NO;
+        if (value == 0) {
+            self.cyl_badge.hidden = YES;
+            self.cyl_badgeBackgroundView.hidden = YES;
+        }
+    }
+    self.cyl_badge.hidden = NO;
+    self.cyl_badgeBackgroundView.hidden = NO;
+    
+    // 设置背景
+    CGRect bgFrame = self.cyl_badge.frame;
+    bgFrame.size.width = bgFrame.size.width + 2;
+    bgFrame.size.height = bgFrame.size.height + 2;
+    self.cyl_badgeBackgroundView.frame = bgFrame;
+    self.cyl_badgeBackgroundView.center = self.cyl_badge.center;
+    self.cyl_badgeBackgroundView.layer.cornerRadius = CGRectGetHeight(self.cyl_badgeBackgroundView.frame) / 2;
+}
+
 - (void)cyl_showNewBadge:(NSString *)value {
     [self cyl_badgeInit];
     //if badge has been displayed and, in addition, is not red dot style, we must update UI.
@@ -144,7 +182,7 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
         }
         self.cyl_badge.frame = frame;
         self.cyl_badge.center = CGPointMake(CGRectGetWidth(self.frame) + 2 + self.cyl_badgeCenterOffset.x, self.cyl_badgeCenterOffset.y);
-        self.cyl_badge.font = [UIFont boldSystemFontOfSize:9];
+        self.cyl_badge.font = [UIFont systemFontOfSize:10];
         
         self.cyl_badge.layer.cornerRadius = CGRectGetHeight(self.cyl_badge.frame) / 2;
         self.cyl_badge.hidden = NO;
@@ -156,6 +194,14 @@ static const CGFloat kCYLBadgeDefaultRedDotRadius = 4.f;
     }
     self.cyl_badge.hidden = NO;
     self.cyl_badgeBackgroundView.hidden = NO;
+    
+    // 设置背景
+    CGRect bgFrame = self.cyl_badge.frame;
+    bgFrame.size.width = bgFrame.size.width + 2;
+    bgFrame.size.height = bgFrame.size.height + 2;
+    self.cyl_badgeBackgroundView.frame = bgFrame;
+    self.cyl_badgeBackgroundView.center = self.cyl_badge.center;
+    self.cyl_badgeBackgroundView.layer.cornerRadius = CGRectGetHeight(self.cyl_badgeBackgroundView.frame) / 2;
 }
     
 - (void)cyl_showNumberBadgeWithValue:(NSInteger)value {
