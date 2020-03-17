@@ -1,5 +1,6 @@
 
 .DS_Store 
+CYLTabBarController.xcodeproj/project.xcworkspace/xcuserdata/chenyilong.xcuserdatad/UserInterfaceState.xcuserstate
 build/ 
 *.pbxuser 
 !default.pbxuser 
@@ -17,8 +18,7 @@ DerivedData
 .idea/ 
 Pods 
 Podfile.lock
-
-CYLTabBarController.xcodeproj/project.xcworkspace/xcuserdata/chenyilong.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcworkspace
 
 
 CYLTabBarController.xcodeproj/xcuserdata/chenyilong.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
