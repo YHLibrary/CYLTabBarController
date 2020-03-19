@@ -82,7 +82,7 @@ static void * const CYLTabImageViewDefaultOffsetContext = (void*)&CYLTabImageVie
     if (deviceVersion >= 10 && deviceVersion < 10.2) {
         [self.tabBar layoutSubviews];//Fix issue #93
     }
-    UITabBar *tabBar =  self.tabBar;
+    CYLTabBar *tabBar =  self.tabBar;
     [tabBar.cyl_visibleControls enumerateObjectsUsingBlock:^(UIControl * _Nonnull control, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([control cyl_isPlusButton] && CYLPlusChildViewController.cyl_plusViewControllerEverAdded) {
             return;

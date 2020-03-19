@@ -21,9 +21,9 @@
 #import "UIView+CYLBadgeExtention.h"
 #import "NSObject+CYLTabBarControllerExtention.h"
 #import "UIColor+CYLTabBarControllerExtention.h"
+#import "UIButton+HintStyle.h"
 
 NS_ASSUME_NONNULL_BEGIN
-#import "UIButton+HintStyle.h"
 
 @class CYLTabBarController;
 typedef void(^CYLViewDidLayoutSubViewsBlock)(CYLTabBarController *tabBarController);
